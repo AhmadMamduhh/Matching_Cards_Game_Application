@@ -2,6 +2,7 @@ package com.ahmedmamdouh.matchingcardsgame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.SystemClock
 import android.view.View
 import android.widget.ImageView
@@ -88,20 +89,32 @@ class MainActivity : AppCompatActivity() {
                     GameController.previousImageView = imageViewsArray[i]
                     GameController.firstClickFlag = false
                 } else {
-                    if(cardView.equals(GameController.previousCardView)){
+                    if(cardView.equals(GameController.previousCardView) || GameController.secondClickFlag){
                         return
                     }
                     imageViewsArray[i].setImageResource(imagesArray[i])
-                    if (GameController.previousImageShown == imagesArray[i]) {
-                        GameController.previousCardView.visibility = View.INVISIBLE
-                        cardView.visibility = View.INVISIBLE
-                    } else {
-                        GameController.previousImageView.setImageResource(android.R.color.transparent)
-                        imageViewsArray[i].setImageResource(android.R.color.transparent)
-                    }
-                    GameController.triesCounter += 1
-                    triesTextView.text = "Tries: ${GameController.triesCounter}"
-                    GameController.firstClickFlag = true
+                    GameController.secondClickFlag = true
+
+                    object : CountDownTimer(1200,1){
+                        override fun onFinish() {
+                            if (GameController.previousImageShown == imagesArray[i]) {
+                                GameController.previousCardView.visibility = View.INVISIBLE
+                                cardView.visibility = View.INVISIBLE
+                            } else {
+                                GameController.previousImageView.setImageResource(android.R.color.transparent)
+                                imageViewsArray[i].setImageResource(android.R.color.transparent)
+                            }
+                            GameController.triesCounter += 1
+                            triesTextView.text = "Tries: ${GameController.triesCounter}"
+                            GameController.firstClickFlag = true
+                            GameController.secondClickFlag = false
+                        }
+
+                        override fun onTick(p0: Long) {
+
+                        }
+
+                    }.start()
 
 
                 }
