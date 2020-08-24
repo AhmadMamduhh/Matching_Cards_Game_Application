@@ -1,5 +1,6 @@
 package com.ahmedmamdouh.matchingcardsgame
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -7,6 +8,10 @@ import android.os.SystemClock
 import android.view.View
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
+import com.ahmedmamdouh.matchingcardsgame.GameController.soundCat
+import com.ahmedmamdouh.matchingcardsgame.GameController.soundChicken
+import com.ahmedmamdouh.matchingcardsgame.GameController.soundDog
+import com.ahmedmamdouh.matchingcardsgame.GameController.soundSnake
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -21,7 +26,18 @@ class MainActivity : AppCompatActivity() {
         fillImagesArray()
         fillImageViewsArray()
         fillCardsArray()
+        loadSounds()
 
+    }
+
+    /**
+     * Loading the audio files into variables
+     */
+    private fun loadSounds() {
+        soundCat.load(baseContext, R.raw.cat, 1)
+        soundDog.load(baseContext, R.raw.dog, 1)
+        soundSnake.load(baseContext, R.raw.snake, 1)
+        soundChicken.load(baseContext, R.raw.chicken, 1)
     }
 
     /**
@@ -71,8 +87,21 @@ class MainActivity : AppCompatActivity() {
 
     fun revealImage(view: View) {
         val cardView = view as CardView
+
+        // Checking if game has been restarted
+        if(GameController.gameRestarted)
+            GameController.gameRestarted = false
+
         for (i in 0 until cardsArray.size) {
             if (cardsArray[i].id == cardView.id) {
+
+                // Play the sound but only under certain conditions
+                if (!GameController.secondClickFlag)
+                    if (GameController.firstClickFlag)
+                        playSound(imagesArray[i])
+                    else if (!cardView.equals(GameController.previousCardView)) {
+                        playSound(imagesArray[i])
+                    }
 
                 // Start counting the time until game completion or restart
                 if (GameController.gameStartedFlag) {
@@ -89,25 +118,31 @@ class MainActivity : AppCompatActivity() {
                     GameController.previousImageView = imageViewsArray[i]
                     GameController.firstClickFlag = false
                 } else {
-                    if(cardView.equals(GameController.previousCardView) || GameController.secondClickFlag){
+                    if (cardView.equals(GameController.previousCardView) || GameController.secondClickFlag) {
                         return
                     }
                     imageViewsArray[i].setImageResource(imagesArray[i])
                     GameController.secondClickFlag = true
 
-                    object : CountDownTimer(1200,1){
+                    // Delay so that the user can have enough time to memorize the locations of the images
+                    object : CountDownTimer(1200, 1) {
                         override fun onFinish() {
-                            if (GameController.previousImageShown == imagesArray[i]) {
-                                GameController.previousCardView.visibility = View.INVISIBLE
-                                cardView.visibility = View.INVISIBLE
-                            } else {
-                                GameController.previousImageView.setImageResource(android.R.color.transparent)
-                                imageViewsArray[i].setImageResource(android.R.color.transparent)
-                            }
-                            GameController.triesCounter += 1
-                            triesTextView.text = "Tries: ${GameController.triesCounter}"
-                            GameController.firstClickFlag = true
-                            GameController.secondClickFlag = false
+
+                            if (!GameController.gameRestarted) {
+
+                                if (GameController.previousImageShown == imagesArray[i]) {
+                                    GameController.previousCardView.visibility = View.INVISIBLE
+                                    cardView.visibility = View.INVISIBLE
+                                } else {
+                                    GameController.previousImageView.setImageResource(android.R.color.transparent)
+                                    imageViewsArray[i].setImageResource(android.R.color.transparent)
+                                }
+                                GameController.triesCounter += 1
+                                triesTextView.text = "Tries: ${GameController.triesCounter}"
+                                GameController.firstClickFlag = true
+                                GameController.secondClickFlag = false
+                            } else
+                                GameController.gameRestarted = false
                         }
 
                         override fun onTick(p0: Long) {
@@ -115,7 +150,6 @@ class MainActivity : AppCompatActivity() {
                         }
 
                     }.start()
-
 
                 }
 
@@ -126,15 +160,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
+     * This function is responsible for playing the appropriate sound file for the animal clicked.
+     * @param i : the ID of the image of the animal which will be used to identify the correct sound
+     * file to play
+     */
+    private fun playSound(i: Int) {
+
+        when (i) {
+            R.drawable.cat_big -> soundCat.play(1, 1f, 1f, 0, 0, 1f)
+            R.drawable.dog_big -> soundDog.play(1, 1f, 1f, 0, 0, 1f)
+            R.drawable.chicken_big -> soundChicken.play(1, 1f, 1f, 0, 0, 1f)
+            R.drawable.snake_big -> soundSnake.play(1, 1f, 1f, 0, 0, 1f)
+        }
+    }
+
+    /**
      * This method is responsible for restarting the game state. It hides all revealed images and
      * reshuffles their positions. The scores are reset.
      */
     fun restartGame(view: View) {
+
+
         triesTextView.text = "Tries: 0"
         chronometer.stop()
         chronometer.text = "00:00"
         GameController.gameStartedFlag = true
         GameController.triesCounter = 0
+        GameController.firstClickFlag = true
+        GameController.secondClickFlag = false
+        GameController.gameRestarted = true
 
 
         for (i in 0 until imageViewsArray.size) {
@@ -144,4 +198,6 @@ class MainActivity : AppCompatActivity() {
 
         imagesArray.shuffle()
     }
+
+
 }
