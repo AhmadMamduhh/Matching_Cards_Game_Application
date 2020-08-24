@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
     private val imagesArray = mutableListOf<Int>()
     private val imageViewsArray = mutableListOf<ImageView>()
@@ -69,15 +70,40 @@ class MainActivity : AppCompatActivity() {
 
     fun revealImage(view: View) {
         val cardView = view as CardView
-        for (i in 0 until cardsArray.size){
-            if(cardsArray[i].id == cardView.id){
-                imageViewsArray[i].setImageResource(imagesArray[i])
+        for (i in 0 until cardsArray.size) {
+            if (cardsArray[i].id == cardView.id) {
 
                 // Start counting the time until game completion or restart
-                if(GameController.gameStartedFlag) {
+                if (GameController.gameStartedFlag) {
                     chronometer.base = SystemClock.elapsedRealtime()
                     chronometer.start()
                     GameController.gameStartedFlag = false
+                }
+
+                // Checking if it's the first clicked card
+                if (GameController.firstClickFlag) {
+                    imageViewsArray[i].setImageResource(imagesArray[i])
+                    GameController.previousImageShown = imagesArray[i]
+                    GameController.previousCardView = cardView
+                    GameController.previousImageView = imageViewsArray[i]
+                    GameController.firstClickFlag = false
+                } else {
+                    if(cardView.equals(GameController.previousCardView)){
+                        return
+                    }
+                    imageViewsArray[i].setImageResource(imagesArray[i])
+                    if (GameController.previousImageShown == imagesArray[i]) {
+                        GameController.previousCardView.visibility = View.INVISIBLE
+                        cardView.visibility = View.INVISIBLE
+                    } else {
+                        GameController.previousImageView.setImageResource(android.R.color.transparent)
+                        imageViewsArray[i].setImageResource(android.R.color.transparent)
+                    }
+                    GameController.triesCounter += 1
+                    triesTextView.text = "Tries: ${GameController.triesCounter}"
+                    GameController.firstClickFlag = true
+
+
                 }
 
 
@@ -95,10 +121,13 @@ class MainActivity : AppCompatActivity() {
         chronometer.stop()
         chronometer.text = "00:00"
         GameController.gameStartedFlag = true
+        GameController.triesCounter = 0
 
 
-        for(i in 0 until imageViewsArray.size)
+        for (i in 0 until imageViewsArray.size) {
             imageViewsArray[i].setImageResource(android.R.color.transparent)
+            cardsArray[i].visibility = View.VISIBLE
+        }
 
         imagesArray.shuffle()
     }
