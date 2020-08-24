@@ -4,4 +4,5 @@
     <string name="tries_0">Tries: 0</string>
     <string name="score_0">Score: 0</string>
     <string name="time_0">Time: 0</string>
+    <string name="time">"Time: "</string>
 </resources>

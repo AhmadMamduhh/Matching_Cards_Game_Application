@@ -44,13 +44,14 @@
                     android:backgroundTint="#FF5722"
                     android:elevation="6dp"
                     android:onClick="revealImage"
-                    app:cardCornerRadius="10dp" >
+                    app:cardCornerRadius="10dp">
+
                     <ImageView
                         android:id="@+id/img1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:src="@drawable/chicken_big"
-                        android:scaleType="fitCenter"/>
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/chicken_big" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -62,13 +63,14 @@
                     android:backgroundTint="#FF5722"
                     android:elevation="6dp"
                     android:onClick="revealImage"
-                    app:cardCornerRadius="10dp" >
+                    app:cardCornerRadius="10dp">
+
                     <ImageView
                         android:id="@+id/img2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:src="@drawable/snake_big"
-                        android:scaleType="fitCenter"/>
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/snake_big" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -80,14 +82,14 @@
                     android:backgroundTint="#FF5722"
                     android:elevation="6dp"
                     android:onClick="revealImage"
-                    app:cardCornerRadius="10dp" >
+                    app:cardCornerRadius="10dp">
 
                     <ImageView
                         android:id="@+id/img3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:src="@drawable/dog_big"
-                        android:scaleType="fitCenter"/>
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/dog_big" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -99,14 +101,14 @@
                     android:backgroundTint="#FF5722"
                     android:elevation="6dp"
                     android:onClick="revealImage"
-                    app:cardCornerRadius="10dp" >
+                    app:cardCornerRadius="10dp">
 
                     <ImageView
                         android:id="@+id/img4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:src="@drawable/cat_big"
-                        android:scaleType="fitCenter" />
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/cat_big" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -127,13 +129,14 @@
                     android:backgroundTint="#FF5722"
                     android:elevation="6dp"
                     android:onClick="revealImage"
-                    app:cardCornerRadius="10dp" >
+                    app:cardCornerRadius="10dp">
+
                     <ImageView
                         android:id="@+id/img5"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:src="@drawable/chicken_big"
-                        android:scaleType="fitCenter"/>
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/chicken_big" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -145,13 +148,14 @@
                     android:backgroundTint="#FF5722"
                     android:elevation="6dp"
                     android:onClick="revealImage"
-                    app:cardCornerRadius="10dp" >
+                    app:cardCornerRadius="10dp">
+
                     <ImageView
                         android:id="@+id/img6"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:src="@drawable/snake_big"
-                        android:scaleType="fitCenter"/>
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/snake_big" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -163,13 +167,14 @@
                     android:backgroundTint="#FF5722"
                     android:elevation="6dp"
                     android:onClick="revealImage"
-                    app:cardCornerRadius="10dp" >
+                    app:cardCornerRadius="10dp">
+
                     <ImageView
                         android:id="@+id/img7"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:src="@drawable/dog_big"
-                        android:scaleType="fitCenter"/>
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/dog_big" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -181,13 +186,14 @@
                     android:backgroundTint="#FF5722"
                     android:elevation="6dp"
                     android:onClick="revealImage"
-                    app:cardCornerRadius="10dp" >
+                    app:cardCornerRadius="10dp">
+
                     <ImageView
                         android:id="@+id/img8"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:src="@drawable/cat_big"
-                        android:scaleType="fitCenter"/>
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/cat_big" />
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
@@ -234,13 +240,26 @@
         android:id="@+id/timeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/time_0"
+        android:text="@string/time"
         android:textColor="#fff"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintHorizontal_bias="0.665"
         app:layout_constraintStart_toEndOf="@+id/triesTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.778" />
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/timeTextView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.778" />
 
