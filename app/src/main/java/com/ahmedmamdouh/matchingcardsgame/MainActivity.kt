@@ -1,6 +1,7 @@
 package com.ahmedmamdouh.matchingcardsgame
 
 
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -34,10 +35,10 @@ class MainActivity : AppCompatActivity() {
      * Loading the audio files into variables
      */
     private fun loadSounds() {
-        soundCat.load(baseContext, R.raw.cat, 1)
-        soundDog.load(baseContext, R.raw.dog, 1)
-        soundSnake.load(baseContext, R.raw.snake, 1)
-        soundChicken.load(baseContext, R.raw.chicken, 1)
+        soundCat = MediaPlayer.create(this, R.raw.cat)
+        soundDog = MediaPlayer.create(this, R.raw.dog)
+        soundSnake = MediaPlayer.create(this, R.raw.snake)
+        soundChicken = MediaPlayer.create(this, R.raw.chicken)
     }
 
     /**
@@ -92,6 +93,10 @@ class MainActivity : AppCompatActivity() {
         if(GameController.gameRestarted)
             GameController.gameRestarted = false
 
+        // Checking if there's a sound file playing
+        if(isSoundPlaying())
+            return
+
         for (i in 0 until cardsArray.size) {
             if (cardsArray[i].id == cardView.id) {
 
@@ -125,7 +130,7 @@ class MainActivity : AppCompatActivity() {
                     GameController.secondClickFlag = true
 
                     // Delay so that the user can have enough time to memorize the locations of the images
-                    object : CountDownTimer(1200, 1) {
+                    object : CountDownTimer(1000, 1) {
                         override fun onFinish() {
 
                             if (!GameController.gameRestarted) {
@@ -160,6 +165,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
+     * This function is responsible for checking if there is any sound files being played.
+     */
+    private fun isSoundPlaying(): Boolean {
+        if(soundCat.isPlaying or soundDog.isPlaying or soundChicken.isPlaying or soundSnake.isPlaying)
+            return true
+
+        return false
+    }
+
+    /**
      * This function is responsible for playing the appropriate sound file for the animal clicked.
      * @param i : the ID of the image of the animal which will be used to identify the correct sound
      * file to play
@@ -167,10 +182,10 @@ class MainActivity : AppCompatActivity() {
     private fun playSound(i: Int) {
 
         when (i) {
-            R.drawable.cat_big -> soundCat.play(1, 1f, 1f, 0, 0, 1f)
-            R.drawable.dog_big -> soundDog.play(1, 1f, 1f, 0, 0, 1f)
-            R.drawable.chicken_big -> soundChicken.play(1, 1f, 1f, 0, 0, 1f)
-            R.drawable.snake_big -> soundSnake.play(1, 1f, 1f, 0, 0, 1f)
+            R.drawable.cat_big -> soundCat.start()
+            R.drawable.dog_big -> soundDog.start()
+            R.drawable.chicken_big -> soundChicken.start()
+            R.drawable.snake_big -> soundSnake.start()
         }
     }
 

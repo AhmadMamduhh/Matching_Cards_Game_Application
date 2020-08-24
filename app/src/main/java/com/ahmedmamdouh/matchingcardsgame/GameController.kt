@@ -1,6 +1,7 @@
 package com.ahmedmamdouh.matchingcardsgame
 
 import android.media.AudioManager
+import android.media.MediaPlayer
 import android.media.SoundPool
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
@@ -14,10 +15,10 @@ object GameController {
     var gameRestarted: Boolean = false
     var previousImageShown : Int = -1
     var triesCounter = 0
-    var soundCat: SoundPool = SoundPool.Builder().build()
-    var soundDog : SoundPool = SoundPool.Builder().build()
-    var soundSnake : SoundPool = SoundPool.Builder().build()
-    var soundChicken : SoundPool = SoundPool.Builder().build()
+    lateinit var soundCat: MediaPlayer
+    lateinit var soundDog : MediaPlayer
+    lateinit var soundSnake : MediaPlayer
+    lateinit var soundChicken : MediaPlayer
 
 
 
