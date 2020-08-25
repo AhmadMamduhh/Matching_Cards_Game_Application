@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ResultsActivity"
-    android:background="#182524">
+    android:background="#15232E">
 
     <TextView
         android:id="@+id/congratsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/well_done"
-        android:textColor="#0FCD17"
+        android:textColor="#03A9F4"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/resultsText"
@@ -41,8 +41,8 @@
         android:id="@+id/restartBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FF5722"
-        android:padding="15dp"
+        android:background="@drawable/gradient_round_button_background"
+        android:padding="13dp"
         android:text="@string/restart"
         android:textColor="#fff"
         android:textSize="20sp"
@@ -58,8 +58,8 @@
         android:id="@+id/exitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FF5722"
-        android:padding="15dp"
+        android:background="@drawable/gradient_round_button_background"
+        android:padding="13dp"
         android:text="@string/exit"
         android:textColor="#fff"
         android:textSize="20sp"

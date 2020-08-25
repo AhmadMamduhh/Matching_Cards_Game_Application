@@ -18,7 +18,6 @@ class ResultsActivity : AppCompatActivity() {
         if (!minutes.equals("00")) {
             congratsMessage = "Too Slow!"
             if (minutes!![0] == '0') {
-                congratsMessage = "Not Bad!"
                 winingMessage = if (minutes!![1] == '1')
                     "You won the game in ${minutes!![1]} minute and $seconds seconds with $tries tries!"
                 else
@@ -33,7 +32,10 @@ class ResultsActivity : AppCompatActivity() {
             }
             else {
                 winingMessage = "You won the game in $seconds seconds with $tries tries!"
-                congratsMessage = "Well Done!"
+               congratsMessage = if(seconds.toInt() > 20)
+                   "Not Bad!"
+               else
+                   "Well Done!"
             }
         }
 

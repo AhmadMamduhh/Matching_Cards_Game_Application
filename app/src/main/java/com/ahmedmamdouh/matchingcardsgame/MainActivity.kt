@@ -2,6 +2,7 @@ package com.ahmedmamdouh.matchingcardsgame
 
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -31,6 +32,19 @@ class MainActivity : AppCompatActivity() {
         fillCardsArray()
         loadSounds()
     }
+
+//    /**
+//     * Handling orientation changes
+//     */
+//    override fun onConfigurationChanged(newConfig: Configuration) {
+//        super.onConfigurationChanged(newConfig)
+//        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+//            setContentView(R.layout.activity_main)
+//        }
+//        else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+//            setContentView(R.layout.activity_main)
+//        }
+//    }
 
     override fun onStart() {
         super.onStart()
