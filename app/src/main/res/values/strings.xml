@@ -5,4 +5,6 @@
     <string name="score_0">Score: 0</string>
     <string name="time_0">Time: 0</string>
     <string name="time">"Time: "</string>
+    <string name="well_done">Well Done!</string>
+    <string name="exit">Exit</string>
 </resources>
