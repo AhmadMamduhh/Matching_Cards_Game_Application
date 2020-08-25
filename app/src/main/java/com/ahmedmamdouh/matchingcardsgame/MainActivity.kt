@@ -33,19 +33,6 @@ class MainActivity : AppCompatActivity() {
         loadSounds()
     }
 
-//    /**
-//     * Handling orientation changes
-//     */
-//    override fun onConfigurationChanged(newConfig: Configuration) {
-//        super.onConfigurationChanged(newConfig)
-//        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
-//            setContentView(R.layout.activity_main)
-//        }
-//        else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-//            setContentView(R.layout.activity_main)
-//        }
-//    }
-
     override fun onStart() {
         super.onStart()
         loadSounds()
@@ -175,8 +162,8 @@ class MainActivity : AppCompatActivity() {
                                     cardView.visibility = View.INVISIBLE
                                     GameController.score += 1
                                 } else {
-                                    GameController.previousImageView.setImageResource(android.R.color.transparent)
-                                    imageViewsArray[i].setImageResource(android.R.color.transparent)
+                                    GameController.previousImageView.setImageResource(R.drawable.question_mark)
+                                    imageViewsArray[i].setImageResource(R.drawable.question_mark)
                                 }
                                 GameController.triesCounter += 1
                                 triesTextView.text = "Tries: ${GameController.triesCounter}"
@@ -249,7 +236,7 @@ class MainActivity : AppCompatActivity() {
         GameController.resetGameState()
 
         for (i in 0 until imageViewsArray.size) {
-            imageViewsArray[i].setImageResource(android.R.color.transparent)
+            imageViewsArray[i].setImageResource(R.drawable.question_mark)
             cardsArray[i].visibility = View.VISIBLE
         }
 
