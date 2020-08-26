@@ -149,6 +149,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     imageViewsArray[i].setImageResource(imagesArray[i])
                     GameController.secondClickFlag = true
+                    GameController.previousCardView.isEnabled = false
+                    cardView.isEnabled = false
 
                     // Delay so that the user can have enough time to memorize the locations of the images
                     object : CountDownTimer(1000, 1) {
@@ -162,6 +164,8 @@ class MainActivity : AppCompatActivity() {
                                 } else {
                                     GameController.previousImageView.setImageResource(R.drawable.question_mark)
                                     imageViewsArray[i].setImageResource(R.drawable.question_mark)
+                                    GameController.previousCardView.isEnabled = true
+                                    cardView.isEnabled = true
                                 }
                                 GameController.triesCounter += 1
                                 triesTextView.text = "Tries: ${GameController.triesCounter}"
