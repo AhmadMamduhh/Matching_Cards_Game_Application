@@ -51,6 +51,7 @@
                         android:id="@+id/img1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:padding="5dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/question_mark" />
                 </androidx.cardview.widget.CardView>
@@ -70,6 +71,7 @@
                         android:id="@+id/img2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:padding="5dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/question_mark" />
                 </androidx.cardview.widget.CardView>
@@ -89,6 +91,7 @@
                         android:id="@+id/img3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:padding="5dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/question_mark" />
                 </androidx.cardview.widget.CardView>
@@ -108,6 +111,7 @@
                         android:id="@+id/img4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:padding="5dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/question_mark" />
 
@@ -136,6 +140,7 @@
                         android:id="@+id/img5"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:padding="5dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/question_mark" />
                 </androidx.cardview.widget.CardView>
@@ -155,6 +160,7 @@
                         android:id="@+id/img6"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:padding="5dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/question_mark" />
                 </androidx.cardview.widget.CardView>
@@ -174,6 +180,7 @@
                         android:id="@+id/img7"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:padding="5dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/question_mark" />
                 </androidx.cardview.widget.CardView>
@@ -193,6 +200,7 @@
                         android:id="@+id/img8"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:padding="5dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/question_mark" />
                 </androidx.cardview.widget.CardView>

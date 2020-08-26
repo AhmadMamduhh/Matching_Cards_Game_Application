@@ -1,6 +1,7 @@
 package com.ahmedmamdouh.matchingcardsgame
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_results.*
@@ -9,6 +10,12 @@ class ResultsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_results)
+
+        // Playing celebration audio file
+        GameController.soundCelebration = MediaPlayer.create(this, R.raw.celebration)
+        GameController.soundCelebration.start()
+
+        // Getting score data from the intent and formatting it
         val tries = intent.getIntExtra("tries", 0)
         val time = intent.getStringExtra("time")
         val minutes = time?.substring(0, 2)
@@ -53,6 +60,11 @@ class ResultsActivity : AppCompatActivity() {
 
         // Exits the application when the exit button is clicked
         exitBtn.setOnClickListener { finish() }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        GameController.soundCelebration.release()
     }
 
 }

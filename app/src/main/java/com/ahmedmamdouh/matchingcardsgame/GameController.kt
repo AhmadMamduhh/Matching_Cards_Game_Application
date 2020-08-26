@@ -20,6 +20,7 @@ object GameController {
     lateinit var soundDog : MediaPlayer
     lateinit var soundSnake : MediaPlayer
     lateinit var soundChicken : MediaPlayer
+    lateinit var soundCelebration : MediaPlayer
 
     /**
      * This method is responsible for resetting the values of all variables to their initial values.
