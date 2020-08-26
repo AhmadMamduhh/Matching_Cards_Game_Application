@@ -15,6 +15,7 @@ object GameController {
     var triesCounter = 0
     var score : Int = 0
     const val MAX_SCORE = 4
+    var timeWhenStopped : Long = 0
     lateinit var soundCat: MediaPlayer
     lateinit var soundDog : MediaPlayer
     lateinit var soundSnake : MediaPlayer

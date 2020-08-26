@@ -2,7 +2,6 @@ package com.ahmedmamdouh.matchingcardsgame
 
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.os.CountDownTimer
 import android.os.SystemClock
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.ahmedmamdouh.matchingcardsgame.GameController.soundCat
 import com.ahmedmamdouh.matchingcardsgame.GameController.soundChicken
@@ -30,17 +28,22 @@ class MainActivity : AppCompatActivity() {
         fillImagesArray()
         fillImageViewsArray()
         fillCardsArray()
-        loadSounds()
     }
 
     override fun onStart() {
         super.onStart()
         loadSounds()
+        if(!GameController.gameStartedFlag) {
+            chronometer.base = GameController.timeWhenStopped + SystemClock.elapsedRealtime()
+            chronometer.start()
+        }
     }
 
     override fun onStop() {
         super.onStop()
         releaseSounds()
+        GameController.timeWhenStopped = chronometer.base - SystemClock.elapsedRealtime()
+        chronometer.stop()
     }
 
     /**
@@ -111,10 +114,6 @@ class MainActivity : AppCompatActivity() {
     fun revealImage(view: View) {
         val cardView = view as CardView
 
-        // Checking if game has been restarted
-        if(GameController.gameRestarted)
-            GameController.gameRestarted = false
-
         // Checking if there's a sound file playing
         if(isSoundPlaying())
             return
@@ -155,7 +154,6 @@ class MainActivity : AppCompatActivity() {
                     object : CountDownTimer(1000, 1) {
                         override fun onFinish() {
 
-                            if (!GameController.gameRestarted) {
 
                                 if (GameController.previousImageShown == imagesArray[i]) {
                                     GameController.previousCardView.visibility = View.INVISIBLE
@@ -169,8 +167,6 @@ class MainActivity : AppCompatActivity() {
                                 triesTextView.text = "Tries: ${GameController.triesCounter}"
                                 GameController.firstClickFlag = true
                                 GameController.secondClickFlag = false
-                            } else
-                                GameController.gameRestarted = false
 
                             // Checking game ending condition
                             if(GameController.score == GameController.MAX_SCORE){
@@ -230,17 +226,39 @@ class MainActivity : AppCompatActivity() {
      */
     fun restartGame(view: View) {
 
-        triesTextView.text = "Tries: 0"
-        chronometer.stop()
-        chronometer.text = "00:00"
-        GameController.resetGameState()
-
-        for (i in 0 until imageViewsArray.size) {
-            imageViewsArray[i].setImageResource(R.drawable.question_mark)
-            cardsArray[i].visibility = View.VISIBLE
+        // Disable cards until the game has been restarted
+        for (i in 0 until cardsArray.size) {
+            cardsArray[i].isEnabled = false
         }
 
-        imagesArray.shuffle()
+        // Make the progress bar visible until the game has been restarted
+        progressBar.visibility = View.VISIBLE
+
+
+        // Delay so that no bugs occur while resetting the game state
+        object : CountDownTimer(1001, 1) {
+            override fun onFinish() {
+                triesTextView.text = "Tries: 0"
+                chronometer.stop()
+                chronometer.text = "00:00"
+                progressBar.visibility = View.INVISIBLE
+                GameController.resetGameState()
+
+                for (i in 0 until imageViewsArray.size) {
+                    imageViewsArray[i].setImageResource(R.drawable.question_mark)
+                    cardsArray[i].visibility = View.VISIBLE
+                    cardsArray[i].isEnabled = true
+                }
+
+                imagesArray.shuffle()
+                }
+
+            override fun onTick(p0: Long) {
+
+            }
+
+        }.start()
+
     }
 
 
