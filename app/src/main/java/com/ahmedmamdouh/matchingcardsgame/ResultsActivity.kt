@@ -62,9 +62,9 @@ class ResultsActivity : AppCompatActivity() {
         exitBtn.setOnClickListener { finish() }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
         GameController.soundCelebration.release()
+        super.onStop()
     }
 
 }
